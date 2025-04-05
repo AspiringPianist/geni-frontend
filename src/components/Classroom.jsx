@@ -227,19 +227,11 @@ const Classroom = ({ view = "main" }) => {
   const renderView = () => {
     switch (view) {
       case 'grade':
-        return (
-          <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Grade Assignment</h2>
-            {/* Add grading interface */}
-          </div>
-        );
+        return <GradeAssignment />;
       case 'submit':
-        return (
-          <div className="p-4">
-            <h2 className="text-2xl font-bold mb-4">Submit Assignment</h2>
-            {/* Add submission interface */}
-          </div>
-        );
+        return <AssignmentView mode="submit" />;
+      case 'view':
+        return <AssignmentView mode="view" />;
       default:
         return (
           <>

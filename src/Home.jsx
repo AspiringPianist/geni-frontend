@@ -11,6 +11,9 @@ import { getAuth, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/
 import { auth, googleProvider } from './firebase';
 import { AuthProvider } from './contexts/AuthContext';
 import Loading from "./components/Loading"; // Import the loading component
+import GradeAssignment from './components/GradeAssignment';
+import AssignmentView from './components/AssignmentView';
+import SubmissionGrade from './components/SubmissionGrade';
 console.log(import.meta.env);
 
 // Modal Component
@@ -417,28 +420,22 @@ const Home = () => {
         >
           {isLoading ? <Loading /> : (
             <Routes>
-              <Route
-                path="/"
-                element={
-                  <>
-                    <HeroSection
-                      isAuthenticated={isAuthenticated}
-                      currentUser={currentUser}
-                      onLogin={handleGoogleLogin}
-                    />
-                    <BenefitsSection />
-                    <CoursesSection />
-                    <TeamSection />
-                  </>
-                }
-              />
+              <Route path="/" element={<>
+                <HeroSection isAuthenticated={isAuthenticated} currentUser={currentUser} onLogin={handleGoogleLogin} />
+                <BenefitsSection />
+                <CoursesSection />
+                <TeamSection />
+              </>} />
               <Route path="/chatbot" element={<Chatbot />} />
               <Route path="/dashboard" element={<Dashboard />} />
               <Route path="/classroom/:classroomId" element={<Classroom />} />
               <Route path="/create-classroom" element={<CreateClassroom />} />
               <Route path="/classroom/:classroomId/create-assignment" element={<CreateAssignment />} />
-              <Route path="/classroom/:classroomId/assignment/:assignmentId/grade" element={<Classroom view="grade" />} />
-              <Route path="/classroom/:classroomId/assignment/:assignmentId/submit" element={<Classroom view="submit" />} />
+              {/* Replace the old routes with these consistent ones */}
+              <Route path="/classroom/:classroomId/assignment/:assignmentId/grade" element={<GradeAssignment />} />
+              <Route path="/classroom/:classroomId/assignment/:assignmentId/submission/:submissionId/grade" element={<SubmissionGrade />} />
+              <Route path="/classroom/:classroomId/assignment/:assignmentId/submit" element={<AssignmentView mode="submit" />} />
+              <Route path="/classroom/:classroomId/assignment/:assignmentId/view" element={<AssignmentView mode="view" />} />
             </Routes>
           )}
 

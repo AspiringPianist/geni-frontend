@@ -38,6 +38,41 @@ const ClassroomCard = ({ classroom, isTeacher }) => {
   );
 };
 
+const AssignmentCard = ({ assignment, classroomId, userRole }) => {
+  const navigate = useNavigate();
+  
+  return (
+      <div className="bg-gray-800 p-4 rounded-lg shadow">
+          <h3 className="text-lg font-semibold text-white mb-2">{assignment.title}</h3>
+          <p className="text-gray-300 mb-4">{assignment.description}</p>
+          <div className="flex gap-2">
+              <button
+                  onClick={() => navigate(`/classroom/${classroomId}/assignment/${assignment.id}/view`)}
+                  className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+              >
+                  View
+              </button>
+              {userRole === 'student' && (
+                  <button
+                      onClick={() => navigate(`/classroom/${classroomId}/assignment/${assignment.id}/submit`)}
+                      className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+                  >
+                      Submit
+                  </button>
+              )}
+              {userRole === 'teacher' && (
+                  <button
+                      onClick={() => navigate(`/classroom/${classroomId}/assignment/${assignment.id}/grade`)}
+                      className="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700"
+                  >
+                      Grade
+                  </button>
+              )}
+          </div>
+      </div>
+  );
+};
+
 export default function Dashboard() {
   const { currentUser } = useAuth();
   const navigate = useNavigate();

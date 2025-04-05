@@ -1,11 +1,13 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import tailwindcss from '@tailwindcss/vite'
+
 // Helper function to create proxy config with header forwarding
 function createProxyConfig(target) {
   return {
     target,
     changeOrigin: true,
+    secure: false,
     configure: (proxy) => {
       proxy.on('proxyReq', (proxyReq, req) => {
         // Forward the Authorization header if it exists
@@ -31,15 +33,18 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/users': createProxyConfig('http://localhost:5049'),
-      '/chats': createProxyConfig('http://localhost:5049'),
-      '/files': createProxyConfig('http://localhost:5049'),
-      '/messages': createProxyConfig('http://localhost:5049'),
-      '/visualsummary': createProxyConfig('http://localhost:5049'),
+      '/users': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/chats': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/files': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/messages': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/visualsummary': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/files/list': createProxyConfig('http://localhost:5049'),
-      '/quiz': createProxyConfig('http://localhost:5049'),
-      '/chat_with_memory': createProxyConfig('http://localhost:5049'),
-      '/api': createProxyConfig('http://localhost:5049'),
+      '/quiz': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/chat_with_memory': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
+      '/api': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049')
     }
+  },
+  build: {
+    outDir: 'dist'
   }
 });
