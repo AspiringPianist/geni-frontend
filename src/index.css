@@ -1,0 +1,7 @@
+@import "tailwindcss";
+
+body {
+  background-color: #1a202c; /* Matches your app's dark theme */
+  color: #fff;
+  font-family: 'Roboto', sans-serif;
+}
