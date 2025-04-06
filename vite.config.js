@@ -33,15 +33,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/users': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/chats': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/files': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/messages': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/visualsummary': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/files/list': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/quiz': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/chat_with_memory': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/api': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049')
+      '/users': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/chats': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/files': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/messages': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/visualsummary': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/files/list': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/quiz': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/chat_with_memory': createProxyConfig('https://web-production-8cb2.up.railway.app'),
+      '/api': createProxyConfig('https://web-production-8cb2.up.railway.app')
     }
   },
   build: {
