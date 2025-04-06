@@ -5,6 +5,40 @@ import { useParams, useNavigate } from 'react-router-dom';  // Add useNavigate
 import Loading from './Loading';
 import { Navigate } from 'react-router-dom';
 const AssignmentList = ({ assignments, isTeacher, onGrade, onSubmit, onCreateAssignment }) => {
+  const { currentUser } = useAuth();
+  const navigate = useNavigate();
+
+  const getSubmissionStatus = (assignment) => {
+    const submission = assignment.submissions?.[currentUser.uid];
+    if (!submission) return 'pending';
+    return submission.status === 'graded' ? 'graded' : 'submitted';
+  };
+
+  const getButtonConfig = (assignment) => {
+    const status = getSubmissionStatus(assignment);
+    
+    switch(status) {
+      case 'graded':
+        return {
+          text: 'View Grade',
+          className: 'bg-green-600 hover:bg-green-700',
+          onClick: () => navigate(`/classroom/${assignment.classroomId}/assignment/${assignment.id}/view`)
+        };
+      case 'submitted':
+        return {
+          text: 'View Submission',
+          className: 'bg-yellow-600 hover:bg-yellow-700',
+          onClick: () => navigate(`/classroom/${assignment.classroomId}/assignment/${assignment.id}/view`)
+        };
+      default:
+        return {
+          text: 'Submit',
+          className: 'bg-blue-600 hover:bg-blue-700',
+          onClick: () => onSubmit(assignment.id)
+        };
+    }
+  };
+
   return (
     <div className="space-y-4">
       {isTeacher && (
@@ -32,6 +66,19 @@ const AssignmentList = ({ assignments, isTeacher, onGrade, onSubmit, onCreateAss
                 <div className="text-gray-400">
                   <span>Due: {assignment.dueDate ? new Date(assignment.dueDate).toLocaleDateString() : 'No due date'}</span>
                   <span className="ml-4">Points: {assignment.totalPoints}</span>
+                  {!isTeacher && (
+                    <span className="ml-4">
+                      Status: {
+                        assignment.submissions?.[currentUser.uid]?.status === 'graded' ? (
+                          <span className="text-green-500">Graded</span>
+                        ) : assignment.submissions?.[currentUser.uid] ? (
+                          <span className="text-yellow-500">Submitted</span>
+                        ) : (
+                          <span className="text-red-500">Pending</span>
+                        )
+                      }
+                    </span>
+                  )}
                 </div>
                 {isTeacher ? (
                   <div className="space-x-2">
@@ -50,15 +97,10 @@ const AssignmentList = ({ assignments, isTeacher, onGrade, onSubmit, onCreateAss
                   </div>
                 ) : (
                   <button 
-                    onClick={() => onSubmit(assignment.id)}
-                    disabled={assignment.submissions?.[currentUser.uid]}
-                    className={`px-4 py-2 rounded ${
-                      assignment.submissions?.[currentUser.uid]
-                        ? 'bg-gray-600 cursor-not-allowed'
-                        : 'bg-blue-600 hover:bg-blue-700'
-                    }`}
+                    onClick={getButtonConfig(assignment).onClick}
+                    className={`px-4 py-2 rounded ${getButtonConfig(assignment).className}`}
                   >
-                    {assignment.submissions?.[currentUser.uid] ? 'Submitted' : 'Submit'}
+                    {getButtonConfig(assignment).text}
                   </button>
                 )}
               </div>

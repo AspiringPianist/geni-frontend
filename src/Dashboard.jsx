@@ -449,9 +449,12 @@ function StudentDashboard({ enrolledClassrooms, joinCode, setJoinCode, handleJoi
                     </td>
                     <td className="p-4">
                       <button
-                        onClick={() => navigate(`/classroom/${assignment.classroomId}/assignment/${assignment.id}/submit`)}
+                        onClick={() => navigate(
+                          `/classroom/${assignment.classroomId}/assignment/${assignment.id}/${
+                            assignment.submissions?.[currentUser.uid] ? 'view' : 'submit'
+                          }`
+                        )}
                         className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-                        disabled={assignment.submissions?.[currentUser.uid]}
                       >
                         {assignment.submissions?.[currentUser.uid] ? 'View' : 'Submit'}
                       </button>

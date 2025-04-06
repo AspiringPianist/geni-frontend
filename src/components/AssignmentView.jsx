@@ -8,27 +8,46 @@ export default function AssignmentView({ mode = 'submit' }) {
   const { currentUser } = useAuth();
   const [assignment, setAssignment] = useState(null);
   const [answers, setAnswers] = useState({});
+  const [submission, setSubmission] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [submitting, setSubmitting] = useState(false);
 
   useEffect(() => {
-    const fetchAssignment = async () => {
+    const fetchData = async () => {
       try {
-        const response = await fetch(`/api/classrooms/${classroomId}/assignments/${assignmentId}`, {
+        // Fetch assignment details
+        const assignmentResponse = await fetch(`/api/classrooms/${classroomId}/assignments/${assignmentId}`, {
           headers: {
             Authorization: `Bearer ${currentUser.idToken}`,
           },
         });
-        if (!response.ok) throw new Error('Failed to fetch assignment');
-        const data = await response.json();
-        setAssignment(data);
-        // Initialize answers object
-        const initialAnswers = {};
-        data.questions.forEach((q, idx) => {
-          initialAnswers[idx] = '';
-        });
-        setAnswers(initialAnswers);
+        if (!assignmentResponse.ok) throw new Error('Failed to fetch assignment');
+        const assignmentData = await assignmentResponse.json();
+        setAssignment(assignmentData);
+
+        // If in view mode, fetch submission
+        if (mode === 'view') {
+          const submissionResponse = await fetch(
+            `/api/classrooms/${classroomId}/assignments/${assignmentId}/submissions/${currentUser.uid}`,
+            {
+              headers: {
+                Authorization: `Bearer ${currentUser.idToken}`,
+              },
+            }
+          );
+          if (!submissionResponse.ok) throw new Error('Failed to fetch submission');
+          const submissionData = await submissionResponse.json();
+          setSubmission(submissionData);
+          setAnswers(submissionData.answers || {});
+        } else {
+          // Initialize empty answers for submit mode
+          const initialAnswers = {};
+          assignmentData.questions.forEach((q, idx) => {
+            initialAnswers[idx] = '';
+          });
+          setAnswers(initialAnswers);
+        }
       } catch (err) {
         setError(err.message);
       } finally {
@@ -36,8 +55,8 @@ export default function AssignmentView({ mode = 'submit' }) {
       }
     };
 
-    fetchAssignment();
-  }, [classroomId, assignmentId, currentUser]);
+    fetchData();
+  }, [classroomId, assignmentId, currentUser, mode]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -78,6 +97,32 @@ export default function AssignmentView({ mode = 'submit' }) {
     <div className="min-h-screen bg-gray-900 text-white p-8">
       <div className="max-w-3xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">{assignment.title}</h1>
+        
+        {mode === 'view' && submission && (
+          <div className="bg-gray-800 rounded-lg p-6 mb-6">
+            <div className="mb-4">
+              <span className="text-gray-400">Status: </span>
+              <span className={`font-semibold ${
+                submission.status === 'graded' ? 'text-green-500' : 'text-yellow-500'
+              }`}>
+                {submission.status === 'graded' ? 'Graded' : 'Pending Review'}
+              </span>
+            </div>
+            {submission.status === 'graded' && (
+              <div className="mb-4">
+                <span className="text-gray-400">Grade: </span>
+                <span className="font-semibold">{submission.grade}/100</span>
+                {submission.feedback && (
+                  <div className="mt-2">
+                    <span className="text-gray-400">Feedback: </span>
+                    <p className="text-white">{submission.feedback}</p>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="bg-gray-800 rounded-lg p-6 mb-6">
           <p className="text-gray-300 mb-4">{assignment.description}</p>
           <div className="flex justify-between text-sm text-gray-400">
