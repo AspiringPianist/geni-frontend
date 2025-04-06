@@ -1,6 +1,38 @@
 {
   "rewrites": [
     {
+      "source": "/users/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/users/$1"
+    },
+    {
+      "source": "/chats/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/chats/$1"
+    },
+    {
+      "source": "/files/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/files/$1"
+    },
+    {
+      "source": "/messages/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/messages/$1"
+    },
+    {
+      "source": "/visualsummary/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/visualsummary/$1"
+    },
+    {
+      "source": "/quiz/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/quiz/$1"
+    },
+    {
+      "source": "/chat_with_memory/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/chat_with_memory/$1"
+    },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://web-production-8cb2.up.railway.app/api/$1"
+    },
+    {
       "source": "/(.*)",
       "destination": "/index.html"
     }
