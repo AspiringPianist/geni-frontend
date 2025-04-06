@@ -38,7 +38,7 @@ export default defineConfig({
       '/files': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/messages': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/visualsummary': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
-      '/files/list': createProxyConfig('http://localhost:5049'),
+      '/files/list': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/quiz': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/chat_with_memory': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049'),
       '/api': createProxyConfig(process.env.VITE_API_URL || 'http://localhost:5049')
