@@ -75,7 +75,7 @@ const ProfileCard = ({ user }) => {
 // Header Component
 const Header = ({ isAuthenticated, currentUser, onLogin, onLogout }) => (
   <header className="flex justify-between items-center px-8 py-4 bg-gray-900 shadow-sm">
-    <div className="text-2xl font-roboto font-bold text-blue-600">Tibby's Classroom</div>
+    <div className="text-2xl font-roboto font-bold text-blue-600">GeNI Classroom</div>
     <nav>
       <ul className="flex items-center">
         <NavItem href="/">Home</NavItem>
@@ -245,8 +245,8 @@ const TeamSection = () => {
       image: "https://res.cloudinary.com/teepublic/image/private/s--YuICndWD--/c_crop,x_10,y_10/c_fit,h_830/c_crop,g_north_west,h_1038,w_1038,x_-134,y_-96/l_upload:v1565806151:production:blanks:vdbwo35fw6qtflw9kezw/fl_layer_apply,g_north_west,x_-245,y_-207/b_rgb:ffffff/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1689579937/production/designs/47962090_0.jpg",
     },
     {
-      name: "Sriram Srikanth",
-      linkedIn: "https://www.linkedin.com/in/sriram-srikanth-066376284/",
+      name: "Chaitya Shah",
+      linkedIn: "https://www.linkedin.com/in/chaitya-shah-0a7589267/",
       image: "https://res.cloudinary.com/teepublic/image/private/s--YuICndWD--/c_crop,x_10,y_10/c_fit,h_830/c_crop,g_north_west,h_1038,w_1038,x_-134,y_-96/l_upload:v1565806151:production:blanks:vdbwo35fw6qtflw9kezw/fl_layer_apply,g_north_west,x_-245,y_-207/b_rgb:ffffff/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1689579937/production/designs/47962090_0.jpg",
     },
     {
@@ -255,8 +255,8 @@ const TeamSection = () => {
       image: "https://res.cloudinary.com/teepublic/image/private/s--YuICndWD--/c_crop,x_10,y_10/c_fit,h_830/c_crop,g_north_west,h_1038,w_1038,x_-134,y_-96/l_upload:v1565806151:production:blanks:vdbwo35fw6qtflw9kezw/fl_layer_apply,g_north_west,x_-245,y_-207/b_rgb:ffffff/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1689579937/production/designs/47962090_0.jpg",
     },
     {
-      name: "Areen Patil",
-      linkedIn: "https://www.linkedin.com/in/areen-patil-98679128b/",
+      name: "Garv Rajput",
+      linkedIn: "https://www.linkedin.com/in/garv-rajput-96b462234/",
       image: "https://res.cloudinary.com/teepublic/image/private/s--YuICndWD--/c_crop,x_10,y_10/c_fit,h_830/c_crop,g_north_west,h_1038,w_1038,x_-134,y_-96/l_upload:v1565806151:production:blanks:vdbwo35fw6qtflw9kezw/fl_layer_apply,g_north_west,x_-245,y_-207/b_rgb:ffffff/c_limit,f_auto,h_630,q_auto:good:420,w_630/v1689579937/production/designs/47962090_0.jpg",
     },
   ];

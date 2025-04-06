@@ -225,7 +225,7 @@ const ChatMessage = ({ sender, message }) => (
         <MarkdownRenderer content={message} />
       )}
       <div className="mt-2 text-xs text-gray-400">
-        {sender === 'user' ? 'You' : 'Tibby'} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+        {sender === 'user' ? 'You' : 'GeNI'} • {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
       </div>
     </div>
   </div>
