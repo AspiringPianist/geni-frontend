@@ -33,15 +33,15 @@ export default defineConfig({
   },
   server: {
     proxy: {
-      '/users': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/chats': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/files': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/messages': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/visualsummary': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/files/list': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/quiz': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/chat_with_memory': createProxyConfig('https://web-production-8cb2.up.railway.app'),
-      '/api': createProxyConfig('https://web-production-8cb2.up.railway.app')
+      '/users': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/chats': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/files': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/messages': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/visualsummary': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/files/list': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/quiz': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/chat_with_memory': createProxyConfig('https://geni-backend-5l8z.onrender.com'),
+      '/api': createProxyConfig('https://geni-backend-5l8z.onrender.com')
     }
   },
   build: {
